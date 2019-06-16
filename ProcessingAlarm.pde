@@ -19,12 +19,14 @@ void setup()
 void draw()
 {
   refreshScreen();
-  if (time % 60 == 0)  //check second
-    if (time / 60 == 10 || time / 60 == 5) //check minute
-      if (!player.isPlaying())
-        player.loop();
-  if (!pause && frameCount%10 == 0)
+
+  if (!pause && frameCount%10 == 0 && time > 0)
+  {
     time--;
+    if (time % 60 == 0)  //check second
+      if (time / 60 == 10 || time / 60 == 5 || time == 0) //check minute
+        player.loop();
+  }
 }
 
 void mousePressed()
