@@ -25,7 +25,13 @@ void draw()
     time--;
     if (time % 60 == 0)  //check second
       if (time / 60 == 10 || time / 60 == 5 || time == 0) //check minute
-        player.loop(3);
+      {
+        player.loop(5);
+        //argument 3 plays 2 beeps.
+        //argument 4 plays indefinite beeps.
+        //argument 5 plays 3 beeps. 
+        //I don't know why. WTF !
+      }
   }
 }
 
