@@ -25,18 +25,14 @@ void draw()
     time--;
     if (time % 60 == 0)  //check second
       if (time / 60 == 10 || time / 60 == 5 || time == 0) //check minute
-        player.loop();
+        player.loop(3);
   }
 }
 
 void mousePressed()
 {
-  if (player.isPlaying())
-    player.pause();
-  else if (mouseButton == LEFT)
+  if (mouseButton == LEFT)
     pause = !pause;
-  else if (mouseButton == RIGHT)
-    time = 3600; //one hour
 
   refreshScreen();
 }
@@ -44,18 +40,28 @@ void mousePressed()
 void refreshScreen()
 {
   background(255);
+  strokeWeight(2);
+
+  float degree = map(time, 0, 3600, -PI/2, 3*PI/2);
+  fill(64, 64, 200);
+  stroke(0);
+  arc(width/2, height/3, width/2, height/2, -PI/2, degree, PIE);
+  noFill();
+  ellipse(width/2, height/3, width/2, height/2);
+
+  String time_str = String.format("%02d:%02d", time / 60, time % 60);
   fill(0);
   textSize(40);
   textAlign(CENTER, CENTER);
+  text(time_str, width/2, height*2/3);
 
-  String time_str = String.format("%02d:%02d", time / 60, time % 60);
-  text(time_str, width/2, height/2);
-
-  fill(255, 0, 0);
-  textSize(40);
+  fill(128, 32, 32);
+  rect(width/4, height*3/4, width/2, height/10, 20);
+  fill(255);
+  textSize(20);
   textAlign(CENTER, CENTER);
   if (pause)
-    text("Paused", width/2, height*2/3);
-  if (player.isPlaying())
-    text("Alarm", width/2, height*2/3);
+    text("Resume", width/4, height*3/4, width/2, height/10);
+  else
+    text("Pause", width/4, height*3/4, width/2, height/10);
 }
