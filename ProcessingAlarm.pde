@@ -61,9 +61,11 @@ public void draw()
 void mousePressed()
 {
   pause = !pause;
-  if(pause)
+  if(pause) {
       timer.cancel();
-  else
+      if(player != null)
+        player.stop();
+  } else
       startTimer();
 }
 
